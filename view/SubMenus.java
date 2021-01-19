@@ -1,5 +1,6 @@
 package view;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.Vector;
@@ -69,17 +70,9 @@ public class SubMenus {
         agenciaFinanciadora = MenuUtil.tryReadValidStr("Insira a agencia financiadora: ", sc);
         valorFinanciado = MenuUtil.tryReadValidDouble("Insira o valor financiado: ", sc);
 
-        System.out.println("Insira uma data de inicio");
-        int dia = MenuUtil.tryReadValidInt("Dia: ", sc);
-        int mes = MenuUtil.tryReadValidInt("Mês: ", sc);
-        int ano = MenuUtil.tryReadValidInt("Ano: ", sc);
-        dataInicio = LocalDate.of(ano, mes, dia);
 
-        System.out.println("Insira uma data de fim");
-        dia = MenuUtil.tryReadValidInt("Dia: ", sc);
-        mes = MenuUtil.tryReadValidInt("Mês: ", sc);
-        ano = MenuUtil.tryReadValidInt("Ano: ", sc);
-        dataFim = LocalDate.of(ano, mes, dia);
+        dataInicio = MenuUtil.tryReadValidDate("Insira uma data de inicio", sc);
+        dataFim = MenuUtil.tryReadValidDate("Insira uma data de fim", sc);
         MenuUtil.limpa();
         if (MenuUtil.dataInvalida(dataInicio, dataFim)) {
             System.out.println("Data inválida");
@@ -150,7 +143,7 @@ public class SubMenus {
             for (int i = 0; i < projs.size(); i++) {
                 System.out.println(i + ") " + projs.elementAt(i));
             }
-            int x = MenuUtil.tryReadValidInt("Selecione um projeto para ser editado ", sc);;
+            int x = MenuUtil.tryReadValidInt("Selecione um projeto para ser editado: ", sc);;
             if (x >= projs.size()) {
                 System.out.println("Não existente");
                 MenuUtil.waitUser(sc);

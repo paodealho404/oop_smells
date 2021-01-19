@@ -129,7 +129,7 @@ public class Menus {
                 System.out.println(i+") "+ lab.getProjeto(i));
         }
         
-        int opt = MenuUtil.tryReadValidInt("Para gerar o relatório de produção acadêmica selecione um projeto: ", sc);
+        int opt = MenuUtil.tryReadValidInt("Para gerar o relatório de produção acadêmica selecione um projeto:\nSeleção: ", sc);
 
         if( opt < lab.getProjetos().size()) {
             Projeto proj = lab.getProjeto(opt);

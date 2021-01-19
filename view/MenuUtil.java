@@ -1,5 +1,6 @@
 package view;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.Vector;
@@ -33,7 +34,8 @@ public class MenuUtil {
             }
             catch(NumberFormatException e) {
                 System.out.println("Entrada inválida");
-                waitUser(sc);
+                System.out.println("Pressione qualquer tecla para continuar...");
+                sc.nextLine();
             }
         }
         return i;
@@ -49,7 +51,8 @@ public class MenuUtil {
             }
             catch(NumberFormatException e) {
                 System.out.println("Entrada inválida");
-                waitUser(sc);
+                System.out.println("Pressione qualquer tecla para continuar...");
+                sc.nextLine();
             }
         }
         return i;
@@ -69,10 +72,28 @@ public class MenuUtil {
             }
             catch(Exception e) {
                 System.out.println(e.getMessage());
-                waitUser(sc);
+                System.out.println("Pressione qualquer tecla para continuar...");
+                sc.nextLine();
             }
         }
         return res;
+    }
+    public static LocalDate tryReadValidDate(String msg, Scanner sc) {
+        while(true) {
+            try {
+                System.out.println(msg);
+                int dia = tryReadValidInt("Dia: ", sc);
+                int mes = tryReadValidInt("Mês: ", sc);
+                int ano = tryReadValidInt("Ano: ", sc);
+                LocalDate data = LocalDate.of(ano, mes, dia);
+                return data;
+            }
+            catch (DateTimeException e) {
+                System.out.println("Data Inválida");
+                System.out.println("Pressione qualquer tecla para continuar...");
+                sc.nextLine();
+            }
+        }
     }
     public static boolean dataInvalida(LocalDate dataInicio, LocalDate dataFim) {
         if(dataFim.isAfter(dataInicio)) return false;
