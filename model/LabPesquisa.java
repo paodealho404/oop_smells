@@ -1,17 +1,22 @@
 package model;
 import java.util.Vector;
+
+import model.strategypattern.IStrategyRelatorio;
+import model.strategypattern.StrategyRelatorioLabPesquisa;
 public class LabPesquisa {
     private String nome;
     private Vector<Colaborador> colaboradores;
     private Vector<Projeto> projetos;
     private Vector<Publicacao> publicacoes;
     private Administrador admin;
+    private IStrategyRelatorio relatorio;
     public LabPesquisa(String nome, Administrador admin) {
         this.nome = nome;
         this.admin = admin;
         this.colaboradores = new Vector<Colaborador>();
         this.publicacoes = new Vector<Publicacao>();
         this.projetos = new Vector<Projeto>();
+        this.relatorio = new StrategyRelatorioLabPesquisa(this);
     }
     public Administrador getAdmin() {
         return admin;
@@ -64,16 +69,10 @@ public class LabPesquisa {
     }
     public void setPublicacoes(Vector<Publicacao> publicacoes) {
         this.publicacoes = publicacoes;
-    }
+    }   
+    
     public String relatorioProdutividade() {
-        int projAnd = getProjetosAndamento();
-        int projConc = getProjetosConcluido();
-        int projElab = getProjetosElaboracao();
-        String res = "Número de colaboradores: " + getColaboradores().size() + "\nNúmero de projetos em elaboração: "+ projElab +
-        "\nNúmero de projetos em andamento: " + projAnd + "\nNúmero de projetos concluídos: " + projConc +"\nNúmero total de projetos: "
-        +getProjetos().size() + "\nOrientações: " + getNumOrientacoes()
-        + "\nPublicacoes: " + publicacoes.size();
-        return res;
+        return relatorio.gerarRelatorio();
     }
     public void addProjeto(Projeto p) {
         if(projetos!=null) {
@@ -139,4 +138,5 @@ public class LabPesquisa {
     public void setProjetos(Vector<Projeto> projetos) {
         this.projetos = projetos;
     }
+
 }

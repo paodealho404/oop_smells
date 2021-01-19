@@ -1,10 +1,9 @@
-package model.commandPattern;
-
+package model.commandpattern;
 import model.Projeto;
 
-public class ProjetoConcluido implements ICommandProjeto{
+public class CommandProjetoConcluido implements ICommandProjeto{
     Projeto projeto;
-    public ProjetoConcluido(Projeto p) {
+    public CommandProjetoConcluido(Projeto p) {
         this.projeto = p;
     }
     public void mudarStatus(){

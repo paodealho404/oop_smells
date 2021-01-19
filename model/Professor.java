@@ -2,11 +2,13 @@ package model;
 
 import java.util.Collections;
 import java.util.Vector;
+import model.strategypattern.StrategyRelatorioProfessor;
 public class Professor extends Colaborador{
     private Vector<Orientacao> orientacao;
     public Professor(String nome, String email)
     {
         super(nome, email);
+        setRelatorio( new StrategyRelatorioProfessor(this) );
         this.orientacao = new Vector<Orientacao>();
     }
     public Vector<Orientacao> getOrientacao() {
@@ -15,24 +17,38 @@ public class Professor extends Colaborador{
     public void setOrientacao(Vector<Orientacao> orientacao) {
         this.orientacao = orientacao;
     }
-    @Override
-    public String toString() {
-        return "Professor| "+super.toString();
+    public String appendInicio() {
+        return "Professor| ";
+    }
+    public String appendProfessorInfo() {
+        return appendInicio() + super.toString();
     }
     @Override
-    public String relatorioProdutividade() {
-        String res = super.relatorioProdutividade();
+    public String toString() {
+        return appendProfessorInfo();
+    }
+    public String appendInicioRelatorio() {
+        return super.relatorioProdutividade();
+    }
+    public Vector<ProducaoAcademica> ordenarProducaoAcademica(){
         Vector<ProducaoAcademica> producoes = new Vector<ProducaoAcademica>(super.getPublicacao());   
         producoes.addAll(getOrientacao());
-        res+= "Produção Academica associada: ";    
-        if(producoes.size()==0) res+="Nenhuma";
+        Collections.sort(producoes, Collections.reverseOrder());
+        return producoes;
+    }
+    public String returnListaProducaoAcademica() {      
+        Vector<ProducaoAcademica> producoes = ordenarProducaoAcademica();
+        if(producoes.size()==0) return "Nenhuma";
         else {
-            res+="\n";
-            Collections.sort(producoes, Collections.reverseOrder());
+            String res =  "\n";   
             for (int i = 0; i < producoes.size(); i++) {
                 res += producoes.elementAt(i)+"\n";
             }
-        }
-        return res;
-        }
+            return res;
+        }  
+    }
+    @Override
+    public String relatorioProdutividade() {
+        return super.relatorio.gerarRelatorio();
+    }
 }

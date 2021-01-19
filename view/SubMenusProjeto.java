@@ -4,8 +4,8 @@ import java.util.Scanner;
 import model.Administrador;
 import model.LabPesquisa;
 import model.Projeto;
-import model.commandPattern.ProjetoAndamento;
-import model.commandPattern.ProjetoConcluido;
+import model.commandpattern.CommandProjetoAndamento;
+import model.commandpattern.CommandProjetoConcluido;
 import model.Colaborador;
 
 public class SubMenusProjeto {
@@ -14,15 +14,15 @@ public class SubMenusProjeto {
         System.out.println("Mudar estado do projeto para: ");
         System.out.println("1) Em andamento");
         System.out.println("2) Concluído");
-        int opt = Integer.parseInt(sc.nextLine());
+        int opt = MenuUtil.tryReadValidInt("Seleção: ", sc);
         switch (opt) {
             case 1:
-                ProjetoAndamento andamento = new ProjetoAndamento(p);
+                CommandProjetoAndamento andamento = new CommandProjetoAndamento(p);
                 admin.setMudancaProjeto(andamento);
                 admin.mudarStatusProjeto();
                 break;
             case 2:
-                ProjetoConcluido concluido = new ProjetoConcluido(p);
+                CommandProjetoConcluido concluido = new CommandProjetoConcluido(p);
                 admin.setMudancaProjeto(concluido);
                 admin.mudarStatusProjeto();
                 break;
@@ -37,7 +37,7 @@ public class SubMenusProjeto {
             System.out.println(i+") "+lab.getColaborador(i));    
         }
         System.out.println("Insira o índice do colaborador a ser adicionado no projeto");
-        int colab = Integer.parseInt(sc.nextLine());
+        int colab = MenuUtil.tryReadValidInt("Seleção: ", sc);
         Colaborador colab_result = lab.getColaborador(colab);
         if (colab_result != null) {
             admin.addProjetoColaborador(projeto, colab_result);

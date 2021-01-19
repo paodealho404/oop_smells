@@ -40,14 +40,31 @@ public class Publicacao extends ProducaoAcademica{
         }
         
     }
+    public String appendInicio() {
+        return "Publicação| "+ super.toString();
+    }
+    public String appendAutores() {
+        return ", Autores: " + appendListaAutores();
+    }
+    public String appendListaAutores() {
+        String res = "";
+        for (int i = 0; i < autores.size(); i++) {
+            res+=autores.elementAt(i).getNome();
+            if(i<autores.size()-1) res+=", ";
+        }
+        return res;
+    }
+    public String appendConferencia() {
+        return ", Conferência: " + getConferencia();
+    }
+    public String appendProjeto() {
+        return ", Projeto Relacionado: "+ projeto.getTitulo();
+    }
+    public String appendPublicacaoInfo() {
+        return appendInicio() + appendAutores() + appendConferencia() + appendProjeto();
+    }
     @Override
     public String toString() {
-        String res = "Publicação| "+super.toString() + ", Autores: ";
-        for (int i = 0; i < autores.size(); i++) {
-                res+=autores.elementAt(i).getNome();
-                if(i<autores.size()-1) res+=", ";
-        }
-        res+=", Conferência: " + getConferencia() +", Projeto Relacionado: "+ projeto.getTitulo();
-        return res;
+        return appendPublicacaoInfo();
     }
 }

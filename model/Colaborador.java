@@ -1,9 +1,11 @@
 package model;
 import java.util.Collections;
 import java.util.Vector;
+import model.strategypattern.IStrategyRelatorio;
 public class Colaborador extends Usuario{
    protected Vector<Publicacao> publicacao;
    protected Vector<Projeto> projetos;
+   IStrategyRelatorio relatorio;
    protected int andamento;
    public Colaborador( String nome, String email)
    {
@@ -11,6 +13,17 @@ public class Colaborador extends Usuario{
       this.andamento = 0;
       this.projetos = new Vector<Projeto>();
       this.publicacao = new Vector<Publicacao>();
+   }
+   public Colaborador( String nome, String email, IStrategyRelatorio relatorio)
+   {
+      super(nome, email);
+      this.andamento = 0;
+      this.projetos = new Vector<Projeto>(); 
+      this.publicacao = new Vector<Publicacao>();
+      this.relatorio = relatorio;
+   }
+   public void setRelatorio(IStrategyRelatorio relatorio) {
+      this.relatorio = relatorio;
    }
    public Vector<Publicacao> getPublicacao() {
       return publicacao;
@@ -45,34 +58,33 @@ public class Colaborador extends Usuario{
    public void setPublicacao(Vector<Publicacao> publicacao) {
       this.publicacao = publicacao;
    }
-   public String appendInicio() {
-      return "Nome: ";
+   public String appendNome() {
+      String res = "Nome: "  + super.getNome();
+      return res;
    }
    public String appendEmail() {
-      return ", Email: ";
+      String res = ", Email: "  + super.getEmail();
+      return res;
    }
+
    public String appendUserInfo() {
-      return appendInicio() + super.getNome() + appendEmail() + super.getEmail();
+      return appendNome() + appendEmail();
    }
    @Override
    public String toString() {
       return appendUserInfo();
    }
-
-   public String appendInicioRelatorio() {
-      return "\nRelatório de Produtividade do(a) Colaborador(a)\n";
-   }
-   public String appendProjetosParticipados() {
-      return "\nProjetos Participados: ";
-   }
-   public String appendProjetosValidos() {
-      String res="";
+   public Vector<Projeto> ordenarProjetos() {
       Vector<Projeto> projetosValidos = new Vector<Projeto>(getProjetosParticipados());
+      Collections.sort(projetosValidos, Collections.reverseOrder());
+      return projetosValidos;
+   }
+   public String returnProjetosValidos() {
+      String res="";
+      Vector<Projeto> projetosValidos = ordenarProjetos();
       if(projetosValidos.size()==0) res+="Nenhum\n";
       else {
          res+="\n";
-         Collections.sort(projetosValidos);
-         Collections.reverse(projetosValidos);
          for (int i = 0; i < projetosValidos.size(); i++) {
             res += projetosValidos.elementAt(i).getTitulo();
             res +=",\n";
@@ -80,11 +92,8 @@ public class Colaborador extends Usuario{
       }
       return res;
    }
-   public String appendColaboradorInfo() {
-      return appendInicioRelatorio() + toString() + appendProjetosParticipados() + appendProjetosValidos();
-   }
    public String relatorioProdutividade()
    {
-     return appendColaboradorInfo();
+      return relatorio.gerarRelatorio();
    }
 }

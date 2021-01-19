@@ -3,6 +3,9 @@ package model;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Vector;
+
+import model.strategypattern.IStrategyRelatorio;
+import model.strategypattern.StrategyRelatorioProjeto;
 public class Projeto implements Comparable<Projeto>{
     private String titulo;
     private LocalDate dataInicio;
@@ -15,6 +18,7 @@ public class Projeto implements Comparable<Projeto>{
     private Vector<Publicacao> publicacoes;
     private boolean valid;
     private String status;
+    private IStrategyRelatorio relatorio;
     public Projeto(String titulo, LocalDate dataInicio, LocalDate dataFim, String agenciaFinanciadora, double valorFinanciado, String objetivo, String descricao, Vector<Colaborador> participantes)
     {
         this.titulo = titulo;
@@ -26,6 +30,7 @@ public class Projeto implements Comparable<Projeto>{
         this.descricao = descricao;
         this.participantes = participantes;
         this.publicacoes = new Vector<Publicacao>();
+        this.relatorio = new StrategyRelatorioProjeto(this);
         this.valid = checkValid();
     }
     public boolean getValid() {
@@ -172,11 +177,11 @@ public class Projeto implements Comparable<Projeto>{
         return "Data de Conclusão: " + getDataFim();
     }
     public String appendParticipantes() {
-        return "Participantes: ";
+        return "\nParticipantes: ";
     }
     public String appendProjetoInfo() {
         return appendProjeto() + appendTitulo() + "\n" + appendStatus() + "\n" + appendObjetivo() + "\n" + appendDescricao() + "\n" +
-        appendDataInicio() + "\n" + appendDataFim() + "\n" + appendParticipantes() + "("+ getParticipantes().size()+ ") "+ appendListaParticipantes() + "\n";
+        appendDataInicio() + "\n" + appendDataFim() + "\n" + appendParticipantes() + "("+ getParticipantes().size()+ ") "+ appendListaParticipantes();
     }
     public String appendListaParticipantes () {
         String res = "";
@@ -187,6 +192,7 @@ public class Projeto implements Comparable<Projeto>{
             if(i!=participantes.size()-1) res+=", ";
             else res+="\n";
         }
+        res+="\n";
         return res;
     }
     public String appendListaPublicacoes() {
@@ -197,27 +203,21 @@ public class Projeto implements Comparable<Projeto>{
         }
         return res;
     }
-    public String appendInicioRelatorio() {
-        return "\nRelatório de Produtividade do Projeto\n";
-    }
-    public String appendPublicacoes() {
-        String res="\nPublicações: ";
-        if(publicacoes.size()==0) res+="Nenhuma";
+    
+    public String returnPublicacoes() {
+        if(publicacoes.size()==0) return "Nenhuma";
         else {
-            res+="\n";
+            String res="\n";
             res += appendListaPublicacoes();
+            return res;
         }
-        return res;
-    }
-    public String appendRelatorioInfo() {
-        return appendInicioRelatorio() + toString() + appendPublicacoes() + "\n";
-    }
-    public String relatorioProdutividade() {
-        return appendRelatorioInfo();
     }
     public boolean isProjectValid() {
         if(getValid() && !getTitulo().isEmpty() && getDataFim()!=null && getDataInicio()!=null
         && getValorFinanciado()>=0 && !getAgenciaFinanciadora().isEmpty() && !getObjetivo().isEmpty() && !getDescricao().isEmpty() && getParticipantes().size()>0) return true;
         return false;
+    }
+    public String relatorioProdutividade() {
+        return relatorio.gerarRelatorio();
     }
 }

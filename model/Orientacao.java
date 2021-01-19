@@ -32,13 +32,31 @@ public class Orientacao extends ProducaoAcademica{
     public void setAlunos(Vector<Aluno> alunos) {
         this.alunos = alunos;
     }
-    @Override
-    public String toString() {
-        String res = "Orientação| " + super.toString() + ", Professor Orientador: "+ professor.getNome()+ ", Orientandos: ";
+    public String appendInicio() {
+        return "Orientação| " + super.toString();
+    }
+    public String appendOrientador() {
+        return ", Professor Orientador: "+ professor.getNome();
+    }
+    public String appendListaOrientandos() {
+        String res= "";
         for (int i = 0; i < alunos.size(); i++) {
             res+= alunos.elementAt(i).getNome();
             if(i<alunos.size()-1) res+=", ";
         }
+        res+="\n";
         return res;
+    
     }
+    public String appendOrientandos() {
+        return ", Orientandos: "+ appendListaOrientandos();
+    }
+    public String appendOrientacaoInfo() {
+        return appendInicio() + appendOrientador() + appendOrientandos();
+    }
+    @Override
+    public String toString() {
+        return appendOrientacaoInfo();
+    }
+
 }

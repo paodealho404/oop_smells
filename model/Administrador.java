@@ -2,7 +2,7 @@ package model;
 
 import java.util.Vector;
 
-import model.commandPattern.ICommandProjeto;
+import model.commandpattern.ICommandProjeto;
 
 public class Administrador extends Usuario{
     private String login;
@@ -115,7 +115,7 @@ public class Administrador extends Usuario{
             System.out.println("Colaborador adicionado com sucesso ao Projeto!");
         }
     }
-    //-------------------------------- CommandPattern
+
     public void addProjetoColaborador(Projeto p, Colaborador c) {
         if(!p.getStatus().equals("Em elaboração")) {
             System.out.println("Não foi possível inserir colaborador. Projeto não está mais em fase de elaboração");

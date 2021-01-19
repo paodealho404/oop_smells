@@ -1,7 +1,8 @@
 package app;
 
 import model.*;
-import model.commandPattern.*;
+import model.commandpattern.*;
+
 import java.time.LocalDate;
 import java.util.Vector;
 public class Test {
@@ -105,8 +106,8 @@ public class Test {
         
 
         System.out.println("\n\nIniciando próximos testes\n\nMudando estados dos projetos criados anteriormente");
-        ProjetoAndamento novaMudanca1 = new ProjetoAndamento(lab.getProjeto("BIOTECNOLOGIA"));
-        ProjetoAndamento novaMudanca2 = new ProjetoAndamento(lab.getProjeto("TECNOBIOLOGIA"));
+        CommandProjetoAndamento novaMudanca1 = new CommandProjetoAndamento(lab.getProjeto("BIOTECNOLOGIA"));
+        CommandProjetoAndamento novaMudanca2 = new CommandProjetoAndamento(lab.getProjeto("TECNOBIOLOGIA"));
         admin.setMudancaProjeto(novaMudanca1);
         admin.mudarStatusProjeto();
         admin.setMudancaProjeto(novaMudanca2 );
@@ -123,7 +124,7 @@ public class Test {
         
         //Agora tornando o projeto em andamento para vincular corretamente
         System.out.println("Alterando estado do projeto para tentar vincular publicação");
-        ProjetoAndamento novaMudanca3 = new ProjetoAndamento(lab.getProjeto("USO DE PLANTAS"));
+        CommandProjetoAndamento novaMudanca3 = new CommandProjetoAndamento(lab.getProjeto("USO DE PLANTAS"));
         admin.setMudancaProjeto(novaMudanca3);
         admin.mudarStatusProjeto();
 
@@ -141,10 +142,10 @@ public class Test {
         //Concluindo os projetos
         System.out.println("\n\nConcluindo os projetos 1 e 2...\n");
         
-        ProjetoConcluido novaMudanca4 = new ProjetoConcluido(proj1);
+        CommandProjetoConcluido novaMudanca4 = new CommandProjetoConcluido(proj1);
         admin.setMudancaProjeto(novaMudanca4);
         admin.mudarStatusProjeto();
-        ProjetoConcluido novaMudanca5 = new ProjetoConcluido(proj2);
+        CommandProjetoConcluido novaMudanca5 = new CommandProjetoConcluido(proj2);
         admin.setMudancaProjeto(novaMudanca5);
         admin.mudarStatusProjeto();
 
@@ -156,9 +157,9 @@ public class Test {
 
         //Testando os colaboradores inseridos
         System.out.println("\n\nImprimindo todos os colaboradores inseridos no laboratório\n\n");
-        lab.getColaboradores().forEach(colaborador->{
-            System.out.println(colaborador);
-        });
+        // lab.getColaboradores().forEach(colaborador->{
+        //     System.out.println(colaborador);
+        // });
 
         //Testando as publicacões inseridas
         System.out.println("\n\nImprimindo todas as publicacões inseridas no laboratório\n\n");

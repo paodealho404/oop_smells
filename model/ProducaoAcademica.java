@@ -19,10 +19,18 @@ public class ProducaoAcademica implements Comparable<ProducaoAcademica>{
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+    public String appendTitulo() {
+        return "Titulo: " + getTitulo();
+    }
+    public String appendDataPublicacao() {
+        return ", Data de Publicação: " + getAnoPublicacao();
+    }
+    public String appendProducaoAcademicaInfo() {
+        return appendTitulo() + appendDataPublicacao();
+    }
     @Override
     public String toString() {
-        String res = "Titulo: " + getTitulo() + ", Data de Publicação: " + getAnoPublicacao();
-        return res;
+        return appendProducaoAcademicaInfo();
     }
     @Override
     public int compareTo(ProducaoAcademica x) {
