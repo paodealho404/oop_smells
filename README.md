@@ -2,8 +2,8 @@
 ## Este repositório é destinado ao Projeto Final da disciplina de Projeto de Software ministrada no Instituto de Computação - UFAL
 
 ## Nesta implementação, foram aplicados 3 Design Patterns
-## Strategy Pattern disponível em: [Strategy](https://github.com/paodealho404/oop_smells/tree/master/model/strategypattern) 🎒🎓📊 
-## Command Pattern disponível em: <a href="https://github.com/paodealho404/oop_smells/tree/master/model/commandpattern">Command</a>
+## Strategy Pattern disponível em: [Strategy](https://github.com/paodealho404/oop_smells/tree/main/model/strategypattern) 🎒🎓📊 
+## Command Pattern disponível em: <a href="https://github.com/paodealho404/oop_smells/tree/main/model/commandpattern">Command</a>
 ## Quanto ao terceiro design pattern (Move Accumulation to Collecting Parameter) não foi necessário criar novas classes, apenas implementar diversos métodos auxiliares novos
 
 
