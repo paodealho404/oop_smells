@@ -2,9 +2,9 @@
 ## Este repositório é destinado ao Projeto Final da disciplina de Projeto de Software ministrada no Instituto de Computação - UFAL
 
 ## Nesta implementação, foram aplicados 3 Design Patterns
-## Strategy Pattern disponível em: [Strategy](https://github.com/paodealho404/oop_smells/tree/main/model/strategypattern) 🎒🎓📊 
-## Command Pattern disponível em: <a href="https://github.com/paodealho404/oop_smells/tree/main/model/commandpattern">Command</a>
-## Quanto ao terceiro design pattern (Move Accumulation to Collecting Parameter) não foi necessário criar novas classes, apenas implementar diversos métodos auxiliares novos
+## Strategy Pattern disponível em: [Strategy](https://github.com/paodealho404/oop_smells/tree/main/model/strategypattern) 📊 
+## Command Pattern disponível em: [Command](https://github.com/paodealho404/oop_smells/tree/main/model/commandpattern) 📊 >
+## Quanto ao terceiro design pattern (Move Accumulation to Collecting Parameter) não foi necessário criar novas classes, apenas implementar diversos métodos auxiliares novos em praticamente todas as classes
 
 
 ### A implementação do Strategy Pattern surgiu da necessidade de gerar os relatórios para as classes de Laboratório de Pesquisa, Projeto, Aluno, Professor e Pesquisador, uma vez que ambos compartilhavam o método gerarRelatorio(), porém, cada classe gerava seu próprio relatório, logo, classes diferentes com mesmo comportamento implementados de maneira diferente caracterizavam uma boa abertura para aplicação do Strategy Pattern. Cada classe ganhou portanto uma instância de relatório e os métodos para gerarRelatorio() dependiam apenas da instância do relatório que lhes foi dada.
