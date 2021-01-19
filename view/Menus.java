@@ -5,7 +5,6 @@ import model.LabPesquisa;
 import model.Projeto;
 import model.Colaborador;
 import java.util.Scanner;
-import view.MenuUtil;
 public class Menus {
     public static void menuAdmin() {
         Scanner sc = new Scanner(System.in);
