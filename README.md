@@ -3,7 +3,7 @@
 
 ## Nesta implementação, foram aplicados 3 Design Patterns
 ## Strategy Pattern disponível em: [Strategy](https://github.com/paodealho404/oop_smells/tree/main/model/strategypattern) 📊 
-## Command Pattern disponível em: [Command](https://github.com/paodealho404/oop_smells/tree/main/model/commandpattern) 📊 >
+## Command Pattern disponível em: [Command](https://github.com/paodealho404/oop_smells/tree/main/model/commandpattern) 📊 
 ## Quanto ao terceiro design pattern (Move Accumulation to Collecting Parameter) não foi necessário criar novas classes, apenas implementar diversos métodos auxiliares novos em praticamente todas as classes
 
 
